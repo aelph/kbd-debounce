@@ -1,0 +1,2 @@
+# Запуск фильтра дребезга при появлении встроенной клавиатуры (applespi)
+ACTION=="add", SUBSYSTEM=="input", KERNEL=="event*", ATTRS{name}=="Apple SPI Keyboard", TAG+="systemd", ENV{SYSTEMD_WANTS}+="kbd-debounce.service"

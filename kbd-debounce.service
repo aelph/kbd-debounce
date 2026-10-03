@@ -1,0 +1,41 @@
+[Unit]
+Description=Keyboard debounce filter (evdev -> uinput)
+# Запускается udev-правилом /etc/udev/rules.d/60-kbd-debounce.rules при появлении Apple SPI Keyboard
+ConditionPathExists=/dev/uinput
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/local/bin/kbd-debounce.py --name "Apple SPI Keyboard" --ms 50 --slow-ms 250 --hold-ms 55 --log
+Restart=on-failure
+RestartSec=2
+Nice=-5
+
+# Изоляция
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+NoNewPrivileges=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectControlGroups=yes
+ProtectClock=yes
+ProtectHostname=yes
+ProtectProc=invisible
+RestrictNamespaces=yes
+RestrictRealtime=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+RestrictAddressFamilies=none
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+SystemCallErrorNumber=EPERM
+CapabilityBoundingSet=
+AmbientCapabilities=
+UMask=0077
+
+# Устройства: только клавиатуры (char 13) и /dev/uinput
+DevicePolicy=closed
+DeviceAllow=char-input rw
+DeviceAllow=/dev/uinput rw
