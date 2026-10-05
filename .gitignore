@@ -1,0 +1,28 @@
+# Claude Code
+.claude/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Vim / NeoVim
+*.swp
+*.swo
+*~
+Session.vim
+.netrwhist
+
+# Резервные копии и временные файлы
+*.bak
+*.orig
+*.tmp
+
+# Журналы
+*.log
